@@ -30,19 +30,11 @@ def register_view(request):
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            password_confirm = form.cleaned_data['password_confirm']
-            if password and password_confirm and password == password_confirm:
-                if User.objects.filter(username=username).exists():
-                    messages.error(request, 'Username already taken.')
-                    return render(request, 'accounts/register.html', {'form':form})
-                user = User.objects.create_user(username=username, email=email, password=password)
-                user.save()
-                messages.success(request, 'Registration successful. You can now log in.')
-                return redirect('login')
-
-                
-            else:
-                messages.error(request, 'Passwords do not match.')
+            # create user
+            user = User.objects.create_user(username=username, email=email, password=password)
+            user.save()
+            messages.success(request, 'Registration successful. You can now log in.')
+            return redirect('login')
     else:
         form = RegistrationForm()
     return render(request, 'accounts/register.html', {'form':form})
