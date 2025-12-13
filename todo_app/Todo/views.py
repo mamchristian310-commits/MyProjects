@@ -6,7 +6,7 @@ from django.contrib import messages
 # Create your views here.
 
 def task_list(request):
-    tasks=Task.objects.all().order_by('-created_at')
+    tasks=Task.objects.all().order_by('created_at')
     return render(request, 'todo/task_list.html', {'tasks':tasks})
 
 def create_task(request):
