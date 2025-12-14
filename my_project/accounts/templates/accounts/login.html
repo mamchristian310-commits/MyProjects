@@ -21,9 +21,11 @@
                             {{ form.as_p }}
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">Login</button>
-                                {% for message in messages %}
-                                <p class="text-success">{{message}}</p>
-                                {% endfor %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                    <p class="alert alert-success" role="alert">{{message}}</p>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                         </form>
                         <div class="lead">
